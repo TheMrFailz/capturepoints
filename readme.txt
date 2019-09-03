@@ -1,0 +1,1 @@
+Drop this entire folder (capturepoints/lua/etc.) into your addons folder. Will only initialize once you set a map up for it.
