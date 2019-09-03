@@ -19,7 +19,6 @@ local deathloss = 5 -- How many tickets are lost on death?
 
 -- Switches between drain modes depending on the gamemode.
 function drainswitcher()
-	
 	if gpoint_mode == 0 then
 		drain_0()
 	

@@ -30,8 +30,26 @@ if SERVER && enableCapturePointGamemode == true then
 	CreateConVar("gpoints_killdrain", 0, FCVAR_ARCHIVE, "Should kills drain points?")
 	CreateConVar("gpoints_mode", 0, FCVAR_ARCHIVE, "Mode type")
 	
-	gpoint_mode = tonumber(GetConVar("gpoints_mode")) -- Gameplay mode. 0 = normal baik, 1 = conquest, 2 = supremacy, 3 = tdm, 4 = capture the flag
-	gpoint_killdrain = GetConVar("gpoints_killdrain")
+	local settingsfile = file.Read("gpoint_settings.txt", "DATA")
+
+	if settingsfile == nil then
+		print("Failed to read settings file, creating a new one...")
+		file.Write("gpoint_settings.txt", "0;0")
+		if file.Read("gpoint_settings.txt", "DATA") != nil then
+			print("New settings file created successfully!")
+
+			settingsfiledat = string.Split(settingsfile, ";")
+		else
+			print("An error has occurred while saving your settings.")
+		end
+	else
+
+		settingsfile = string.Split(settingsfile, ";")
+
+	end
+
+	gpoint_mode = tonumber(settingsfile[1]) -- Gameplay mode. 0 = normal baik, 1 = conquest, 2 = supremacy, 3 = tdm, 4 = capture the flag
+	gpoint_killdrain = tonumber(settingsfile[2])
 
 	print("Capture Points Initialized")
 	print("starting w/ caps: " .. gpoint_Battles_C .. " max is " .. gpoint_Battles)
@@ -416,12 +434,10 @@ if SERVER && enableCapturePointGamemode == true then
 		end
 
 		if killdrainno > killdrainyes then
-			RunConsoleCommand("gpoints_killdrain", "0")
+			file.Write("gpoint_settings", (winningmodeid .. ";0"))
 		elseif killdrainyes > killdrainno then
-			RunConsoleCommand("gpoints_killdrain", "1")
+			file.Write("gpoint_settings", (winningmodeid .. ";1"))
 		end
-		
-		RunConsoleCommand("gpoints_mode", winningmodeid)
 		
 		print("Winning map: " .. votedmapslist[winningmapid][1])
 		print("Winning mode: " .. modes2send[winningmodeid][1])
