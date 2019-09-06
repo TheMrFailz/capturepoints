@@ -15,8 +15,8 @@ local gpointEditorMode = true
 gpoint_TeamAID = 100 -- Team A's id, make it something unique.
 gpoint_TeamBID = 101 -- Team B's id, make it something unique.
 gpoint_TicketDelay = 5 -- Time between losing tickets.
-gpoint_TicketMulti = 200 -- Points * this = tickets lost per ticket loss tick.
-gpoint_VoteTime = 30
+gpoint_TicketMulti = 2 -- Points * this = tickets lost per ticket loss tick.
+gpoint_VoteTime = 60
 
 gpoint_Battles = 2 -- How many wins / losses before map vote 
 gpoint_Battles_C = 0 -- counter for the above. Do not touch.
