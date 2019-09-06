@@ -14,7 +14,7 @@ if CLIENT then
 		local teamBTick = 0
 
 		ticketwindow = vgui.Create( "DFrame" )
-		ticketwindow:SetPos( 25, 25 )
+		ticketwindow:SetPos( (ScrW() / 2) - (260 / 2), 25 )
 		ticketwindow:SetSize( 260, 100 )
 		ticketwindow:SetTitle( "Tickets" )
 		ticketwindow:SetVisible( true )
