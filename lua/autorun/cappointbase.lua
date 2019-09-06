@@ -2,6 +2,7 @@
 AddCSLuaFile( "teamticketsUI.lua" )
 
 include("ticketdrain.lua")
+include("weightlimittech.lua")
 
 -- Enable / disable the whole thing.
 local enableCapturePointGamemode = true 
@@ -14,8 +15,8 @@ local gpointEditorMode = true
 gpoint_TeamAID = 100 -- Team A's id, make it something unique.
 gpoint_TeamBID = 101 -- Team B's id, make it something unique.
 gpoint_TicketDelay = 5 -- Time between losing tickets.
-gpoint_TicketMulti = 2 -- Points * this = tickets lost per ticket loss tick.
-gpoint_VoteTime = 10
+gpoint_TicketMulti = 200 -- Points * this = tickets lost per ticket loss tick.
+gpoint_VoteTime = 30
 
 gpoint_Battles = 2 -- How many wins / losses before map vote 
 gpoint_Battles_C = 0 -- counter for the above. Do not touch.
@@ -27,9 +28,10 @@ gpoint_Battles_C = 0 -- counter for the above. Do not touch.
 
 if SERVER && enableCapturePointGamemode == true then
 
-	CreateConVar("gpoints_killdrain", 0, FCVAR_ARCHIVE, "Should kills drain points?")
-	CreateConVar("gpoints_mode", 0, FCVAR_ARCHIVE, "Mode type")
-	
+	if ConVarExists("gpoints_maxweight") == false then
+		CreateConVar("gpoints_maxweight", 60000, FCVAR_ARCHIVE, "Maximum tank weightlimit.")
+	end
+
 	local settingsfile = file.Read("gpoint_settings.txt", "DATA")
 
 	if settingsfile == nil then
