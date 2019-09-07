@@ -20,8 +20,8 @@ if CLIENT then
 		local teamBTick = 0
 
 		ticketwindow = vgui.Create( "DFrame" )
-		ticketwindow:SetPos( (ScrW() / 2) - (300 / 2), 25 )
-		ticketwindow:SetSize( 300, 100 )
+		ticketwindow:SetPos( (ScrW() / 2) - (310 / 2), 25 )
+		ticketwindow:SetSize( 310, 100 )
 		ticketwindow:SetTitle( "Tickets" )
 		ticketwindow:SetVisible( true )
 		ticketwindow:SetDraggable( true )
@@ -35,7 +35,7 @@ if CLIENT then
 		teamALabel:SetFont("Trebuchet24")
 		
 		local teamBLabel = vgui.Create("DLabel", ticketwindow)
-		teamBLabel:SetPos(50 + 200 / 2,25)
+		teamBLabel:SetPos(60 + 200 / 2,25)
 		teamBLabel:SetSize(200 - 10 / 2, 100 - 25 - 5)
 		teamBLabel:SetText("Team Blue: " .. teamBTick)
 		teamBLabel:SetFont("Trebuchet24")
