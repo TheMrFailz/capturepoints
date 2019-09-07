@@ -22,7 +22,9 @@ gpoint_VoteTime = 60
 gpoint_Battles = 4 -- How many wins / losses before map vote 
 gpoint_Battles_C = 0 -- counter for the above. Do not touch.
 
-
+-- setting up each team
+team.SetUp(gpoint_TeamAID, "Red Team", Color(255,0,0))
+team.SetUp(gpoint_TeamBID, "Blue Team", Color(0,0,255))
 
 
 -- todo: fix mode set
@@ -92,9 +94,7 @@ if SERVER && enableCapturePointGamemode == true then
 	util.AddNetworkString( "capturepointcaptured" )
 	util.AddNetworkString( "broadcastvoteuig" )
 
-	-- setting up each team
-	team.SetUp(gpoint_TeamAID, "Red Team", Color(255,0,0))
-	team.SetUp(gpoint_TeamBID, "Blue Team", Color(0,0,255))
+	
 
 
 	-- Start up the UI

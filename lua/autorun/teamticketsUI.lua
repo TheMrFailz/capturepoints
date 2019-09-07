@@ -6,9 +6,11 @@ include("cappointbase.lua")
 
 ]]
 
+
+
 if CLIENT then
 
-	
+
 	local pointpostable
 
 	local ticketwindow
