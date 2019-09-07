@@ -94,7 +94,7 @@ if enableCapturePointGamemode == true then
 	function loadExistingSpawnPoint()
 		-- Grab the current map.
 		local mapName = game.GetMap()
-		print("loadingspawnsXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+		
 		-- All spawn point data files will be saved in this name format.
 		local spawnFileName = "gpoints_" .. mapName .. "_sp.txt"
 
@@ -220,6 +220,7 @@ if enableCapturePointGamemode == true then
 		print("Done generating point file!")
 	end
 
+	-- Save all currently loaded cap points.
 	function saveExistingCapPoint()
 		local mapName = game.GetMap()
 		
@@ -251,6 +252,7 @@ if enableCapturePointGamemode == true then
 		
 	end
 
+	-- Spawn a particular cap point.
 	function spawnCapPoint(ply, args)
 		
 
@@ -276,9 +278,37 @@ if enableCapturePointGamemode == true then
 
 	end
 
+	-- load custom map settings for a particular map. 
+	-- format: Ticket multiplier integer, Total battles before map change, max tickets for each team
+	function loadmapsettingsfile()
+		local mapName = game.GetMap()
+		local mapsettingsfile = file.Read("gpoints_" .. mapName .. "_settings.txt", "DATA")
 
+		if mapsettingsfile == nil then
+			print("No custom map settings file found! Create one using the 'gpoint_newmapsetting' command!")
+			print("Loading default gamemode settings...")
+		else
+			print("Loaded custom map settings.")
+			mapsettingsfile = string.Split(mapsettingsfile, ";")
+			PrintTable(mapsettingsfile)
+			gpoint_TicketMulti = util.StringToType(mapsettingsfile[1],"int")
+			gpoint_Battles = util.StringToType(mapsettingsfile[2],"int")
+			teamATickets = util.StringToType(mapsettingsfile[3],"int")
+			teamBTickets = util.StringToType(mapsettingsfile[3],"int")
 
+		end
+	end
 
+	function newmapsettings()
+		file.Write("gpoints_" .. mapName .. "_settings.txt", "2;4;300")
+		if file.Read("gpoints_" .. mapName .. "_settings.txt", "DATA") != nil then
+			print("New map settings file created successfully! Reboot for effect.")
+		else
+			print("An error has occurred while saving your map settings.")
+		end
+
+	end
+	
 end
 
 

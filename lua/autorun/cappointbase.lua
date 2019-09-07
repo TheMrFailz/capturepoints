@@ -67,7 +67,8 @@ if SERVER && enableCapturePointGamemode == true then
 	-- Team ticket stuff
 	teamATickets = 300
 	teamBTickets = 300
-
+	
+	loadmapsettingsfile()
 	
 
 	-- Maps that are getting voted on (used for counting votes) 
@@ -353,7 +354,7 @@ if SERVER && enableCapturePointGamemode == true then
 		concommand.Add("addSpawnPointA", addSpawnPointA)
 		concommand.Add("addSpawnPointB", addSpawnPointB)
 		concommand.Add("saveExistingSpawnPoint", saveExistingSpawnPoint)
-		
+		concommand.Add("gpoint_newmapsetting", newmapsettings)
 
 	end
 
