@@ -5,11 +5,15 @@
 		
 ]]
 
-if !SERVER then return false end
+
+
+if CLIENT then return false end
+
+print("Map loader file initialized.")
+
+
 if enableCapturePointGamemode == true then
 
-	local gpCapturePointTable = {} -- Table of all the points for this given instance.
-	local cappostable = {} -- NGL I don't actually remember what the point of this variable is.
 	
 	-- Function to check for existing cap points.
 	function loadExistingCapPoint()
@@ -84,16 +88,13 @@ if enableCapturePointGamemode == true then
 
 	hook.Add("InitPostEntity", "loadGCapPoints", loadExistingCapPoint)
 	
-	
-	local spawnpostable = {}
-	local spawnpostableA = {}
-	local spawnpostableB = {}
+
 
 	-- Function to check for existing spawn points.
 	function loadExistingSpawnPoint()
 		-- Grab the current map.
 		local mapName = game.GetMap()
-
+		print("loadingspawnsXXXXXXXXXXXXXXXXXXXXXXXXXXX")
 		-- All spawn point data files will be saved in this name format.
 		local spawnFileName = "gpoints_" .. mapName .. "_sp.txt"
 

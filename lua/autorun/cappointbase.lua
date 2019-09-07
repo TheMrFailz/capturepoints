@@ -3,11 +3,11 @@ AddCSLuaFile( "teamticketsUI.lua" )
 
 include("ticketdrain.lua")
 include("weightlimittech.lua")
-include("mapsettings.lua")
+include("mapsettingsfile.lua")
 
 -- Enable / disable the whole thing.
-local enableCapturePointGamemode = true 
-local gpointEditorMode = true
+enableCapturePointGamemode = true 
+gpointEditorMode = true
 
 
 
@@ -28,6 +28,13 @@ gpoint_Battles_C = 0 -- counter for the above. Do not touch.
 -- todo: fix mode set
 
 if SERVER && enableCapturePointGamemode == true then
+
+	gpCapturePointTable = {} -- Table of all the points for this given instance.
+	cappostable = {} -- NGL I don't actually remember what the point of this variable is.
+
+	spawnpostable = {}
+	spawnpostableA = {}
+	spawnpostableB = {}
 
 	if ConVarExists("gpoints_maxweight") == false then
 		CreateConVar("gpoints_maxweight", 60000, FCVAR_ARCHIVE, "Maximum tank weightlimit.")

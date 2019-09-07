@@ -5,10 +5,13 @@
 
 ]]
 
+if CLIENT then return false end
+
+print("Weight limit file initialized.")
+
 -- Delay and timer to keep player's chat from being instantly nuked.
 -- Will get screwy if one player on the server keeps trying to spam auto weapons on an overloaded chassis.
 
-print("Weight limit file initialized.")
 
 local wlalertdelay = 1
 local wlalertdelaytimer = 0
