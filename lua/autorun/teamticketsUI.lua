@@ -20,8 +20,8 @@ if CLIENT then
 		local teamBTick = 0
 
 		ticketwindow = vgui.Create( "DFrame" )
-		ticketwindow:SetPos( (ScrW() / 2) - (260 / 2), 25 )
-		ticketwindow:SetSize( 260, 100 )
+		ticketwindow:SetPos( (ScrW() / 2) - (300 / 2), 25 )
+		ticketwindow:SetSize( 300, 100 )
 		ticketwindow:SetTitle( "Tickets" )
 		ticketwindow:SetVisible( true )
 		ticketwindow:SetDraggable( true )
@@ -29,13 +29,13 @@ if CLIENT then
 		--ticketwindow:MakePopup()
 		
 		local teamALabel = vgui.Create("DLabel", ticketwindow)
-		teamALabel:SetPos(5,25)
+		teamALabel:SetPos(10,25)
 		teamALabel:SetSize(200 - 20 / 2, 100 - 25 - 5)
 		teamALabel:SetText("Team Red: " .. teamATick)
 		teamALabel:SetFont("Trebuchet24")
 		
 		local teamBLabel = vgui.Create("DLabel", ticketwindow)
-		teamBLabel:SetPos(30 + 200 / 2,25)
+		teamBLabel:SetPos(50 + 200 / 2,25)
 		teamBLabel:SetSize(200 - 10 / 2, 100 - 25 - 5)
 		teamBLabel:SetText("Team Blue: " .. teamBTick)
 		teamBLabel:SetFont("Trebuchet24")
@@ -44,8 +44,8 @@ if CLIENT then
 			teamATick = net.ReadInt(32)
 			teamBTick = net.ReadInt(32)
 			if teamALabel != nil and teamBLabel != nil then
-				teamALabel:SetText("Team A: " .. teamATick)
-				teamBLabel:SetText("Team B: " .. teamBTick)
+				teamALabel:SetText("Team Red: " .. teamATick)
+				teamBLabel:SetText("Team Blue: " .. teamBTick)
 			end
 		end)
 	
@@ -59,7 +59,7 @@ if CLIENT then
 
 		if ticketwindow == nil then
 			maketicketwindow()
-			print("setting up")
+			print("Initializing ticket window...")
 		end
 	end)
 	
