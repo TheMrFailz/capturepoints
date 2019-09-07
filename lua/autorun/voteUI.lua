@@ -2,6 +2,13 @@ include("cappointbase.lua")
 
 if SERVER then return false end
 
+--[[
+	Clientside UI files.
+
+
+]]
+
+
 function cappoint_ui_vote(maps, modes)
 	
 	-- Incase someone starts us with invalid or broken arguments.
