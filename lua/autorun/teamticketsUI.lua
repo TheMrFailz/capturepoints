@@ -1,5 +1,11 @@
 include("cappointbase.lua")
 
+--[[
+	Clientside UI files.
+
+
+]]
+
 if CLIENT then
 
 	
