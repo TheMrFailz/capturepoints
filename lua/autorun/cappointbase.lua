@@ -203,6 +203,12 @@ if SERVER && enableCapturePointGamemode == true then
 				table.insert(maps2remove, maps2add[i])
 			end
 		end
+
+		for i = 1, #maps2add do
+			if string.EndsWith(maps2add[i], "_settings.txt") then
+				table.insert(maps2remove, maps2add[i])
+			end
+		end
 		
 		-- remove duplicate maps.
 		for i = 1, #maps2remove do
