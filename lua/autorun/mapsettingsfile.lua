@@ -132,8 +132,10 @@ if enableCapturePointGamemode == true then
 		for i = 1, table.Count(spawnpostable) do
 			if spawnpostable[i][1] == "a" then
 				table.insert(spawnpostableA, spawnpostable[i])
+				--print("A found!")
 			elseif spawnpostable[i][1] == "b" then
 				table.insert(spawnpostableB, spawnpostable[i])
+				--print("B found!")
 			end 
 			
 		end
@@ -279,7 +281,7 @@ if enableCapturePointGamemode == true then
 	end
 
 	-- load custom map settings for a particular map. 
-	-- format: Ticket multiplier integer, Total battles before map change, max tickets for each team
+	-- format: Ticket multiplier integer, Total battles before map change, max tickets for each team, weightlimit (60000 for 60 ton)
 	function loadmapsettingsfile()
 		local mapName = game.GetMap()
 		local mapsettingsfile = file.Read("gpoints_" .. mapName .. "_settings.txt", "DATA")
@@ -295,12 +297,20 @@ if enableCapturePointGamemode == true then
 			gpoint_Battles = util.StringToType(mapsettingsfile[2],"int")
 			teamATickets = util.StringToType(mapsettingsfile[3],"int")
 			teamBTickets = util.StringToType(mapsettingsfile[3],"int")
+			
+			if mapsettingsfile[4] != nil and mapsettingsfile[4] != "" then
+				gpoint_MapWeightLimit = util.StringToType(mapsettingsfile[4],"int")
+				print("Custom map weight limit of " .. gpoint_MapWeightLimit .. " detected! Overriding default.")
+
+				
+			end
 
 		end
 	end
 
 	function newmapsettings()
-		file.Write("gpoints_" .. mapName .. "_settings.txt", "2;4;300")
+		local mapName = game.GetMap()
+		file.Write("gpoints_" .. mapName .. "_settings.txt", "2;4;300;60000")
 		if file.Read("gpoints_" .. mapName .. "_settings.txt", "DATA") != nil then
 			print("New map settings file created successfully! Reboot for effect.")
 		else

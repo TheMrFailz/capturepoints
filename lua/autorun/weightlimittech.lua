@@ -34,14 +34,16 @@ function weightlimitcheck(gunent, bullet)
 	
 	totalmass = gunent.acftotal
 
-	local gmaxweightshoot = GetConVar("gpoints_maxweight"):GetFloat() + 1
+	if gmaxweightshoot == nil then
+		gmaxweightshoot = GetConVar("gpoints_maxweight"):GetFloat() + 1
+	end
 
 	if totalmass > gmaxweightshoot then
 		
 		if CurTime() > wlalertdelaytimer then
 			local gunowner = gunent:CPPIGetOwner()
 			print(gunowner)
-			gunowner:PrintMessage(HUD_PRINTTALK, "Your contraption is too heavy to fire (" .. totalmass .. " kg). The server weightlimit is: " .. gmaxweightshoot .. " kg.")
+			gunowner:PrintMessage(HUD_PRINTTALK, "Your contraption is too heavy to fire (" .. totalmass .. " kg). The server / Map weightlimit is: " .. gmaxweightshoot .. " kg.")
 			wlalertdelaytimer = CurTime() + wlalertdelay
 		end
 
@@ -53,6 +55,8 @@ function weightlimitcheck(gunent, bullet)
 end
 
 hook.Add("ACF_FireShell", "WeightLimitCheckScript", weightlimitcheck)
+
+
 --[[
 local weightableclass = {
 	"prop_physics",

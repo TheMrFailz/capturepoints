@@ -41,7 +41,7 @@ if SERVER && enableCapturePointGamemode == true then
 	if ConVarExists("gpoints_maxweight") == false then
 		CreateConVar("gpoints_maxweight", 60000, FCVAR_ARCHIVE, "Maximum tank weightlimit.")
 	end
-
+	
 	local settingsfile = file.Read("gpoint_settings.txt", "DATA")
 
 	if settingsfile == nil then
@@ -60,6 +60,8 @@ if SERVER && enableCapturePointGamemode == true then
 
 	end
 
+	
+
 	gpoint_mode = tonumber(settingsfile[1]) -- Gameplay mode. 0 = normal baik, 1 = conquest, 2 = supremacy, 3 = tdm, 4 = capture the flag
 	gpoint_killdrain = tonumber(settingsfile[2])
 
@@ -72,6 +74,9 @@ if SERVER && enableCapturePointGamemode == true then
 	
 	loadmapsettingsfile()
 	
+	if gpoint_MapWeightLimit != nil then
+		gmaxweightshoot = gpoint_MapWeightLimit + 1
+	end
 
 	-- Maps that are getting voted on (used for counting votes) 
 	local votedmapslist = {}
@@ -111,6 +116,7 @@ if SERVER && enableCapturePointGamemode == true then
 				ply:SetPos(telepos)
 			end
 
+			
 			ply:SetNWBool("teambool", false)
 
 		elseif ply:Team() == gpoint_TeamBID then
@@ -119,11 +125,13 @@ if SERVER && enableCapturePointGamemode == true then
 			if telepos != nil then
 				ply:SetPos(telepos)
 			end
-
+			
+			
 			ply:SetNWBool("teambool", true)
 
 
 		else
+			
 			net.Start("gpoint_teammenu")
 			local acnt, bcnt = getTeamCounts()
 			net.WriteInt(acnt, 32)
@@ -239,12 +247,12 @@ if SERVER && enableCapturePointGamemode == true then
 	-- Function for each vote that comes in.
 	function gpoint_receivevote(mapvote, modevote, drainvote)
 		votedmapslist[mapvote][2] = votedmapslist[mapvote][2] + 1
-		modes2send[modevote][2] = modes2send[modevote][2] + 1
+		--modes2send[modevote][2] = modes2send[modevote][2] + 1
 		
 		if drainvote == false then
-			killdrainno = killdrainno + 1
+			--killdrainno = killdrainno + 1
 		elseif drainvote == true then
-			killdrainyes = killdrainyes + 1
+			--killdrainyes = killdrainyes + 1
 		end
 		
 	end
@@ -269,14 +277,16 @@ if SERVER && enableCapturePointGamemode == true then
 		
 		for i = 1, #modes2send do
 			if modes2send[i][2] > modes2send[winningmodeid][2] then
-				winningmodeid = i
+				--winningmodeid = i
 			end
 		end
+			
+		winningmodeid = 0
 
 		if killdrainno > killdrainyes then
-			file.Write("gpoint_settings", (winningmodeid .. ";0"))
+			--file.Write("gpoint_settings", (winningmodeid .. ";0"))
 		elseif killdrainyes > killdrainno then
-			file.Write("gpoint_settings", (winningmodeid .. ";1"))
+			--file.Write("gpoint_settings", (winningmodeid .. ";1"))
 		end
 		
 		print("Winning map: " .. votedmapslist[winningmapid][1])
@@ -328,6 +338,7 @@ if SERVER && enableCapturePointGamemode == true then
 	end
 
 	hook.Add("PlayerButtonDown", "openteammenug", openupteammenu)
+
 
 
 	function addSpawnPointA(ply, args)
