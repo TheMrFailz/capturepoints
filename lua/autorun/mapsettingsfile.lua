@@ -14,6 +14,7 @@ print("Map loader file initialized.")
 
 if enableCapturePointGamemode == true then
 
+	print("GPOINTS Map Settings File loaded.")
 	
 	-- Function to check for existing cap points.
 	function loadExistingCapPoint()

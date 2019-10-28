@@ -10,7 +10,6 @@ enableCapturePointGamemode = true
 gpointEditorMode = true
 
 
-
 -- HEY CHANGE THIS SHIT HERE OR NOTHING WILL WORK:
 -- Team IDs
 gpoint_TeamAID = 100 -- Team A's id, make it something unique.
@@ -30,6 +29,8 @@ team.SetUp(gpoint_TeamBID, "Blue Team", Color(0,0,255))
 -- todo: fix mode set
 
 if SERVER && enableCapturePointGamemode == true then
+
+	print("GPOINTS Main File Loaded.")
 
 	gpCapturePointTable = {} -- Table of all the points for this given instance.
 	cappostable = {} -- NGL I don't actually remember what the point of this variable is.
