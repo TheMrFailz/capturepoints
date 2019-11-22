@@ -106,6 +106,9 @@ if enableCapturePointGamemode == true then
 		if not pointFile then
 			print("[NOTE] No map spawn point file found! Disabling gamemode.")
 			enableCapturePointGamemode = false
+			net.Start("markersisenable")
+				
+			net.Broadcast()
 			return
 		end
 

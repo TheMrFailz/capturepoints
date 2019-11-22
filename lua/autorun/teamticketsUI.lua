@@ -10,6 +10,11 @@ include("cappointbase.lua")
 
 if CLIENT then
 
+	shoulddrawplayermarker = true
+	
+	net.Receive("markersisenable", function()
+		shoulddrawplayermarker = false
+	end)
 
 	local pointpostable
 
@@ -114,6 +119,7 @@ if CLIENT then
 		if ( !IsValid( ply ) ) then return end
 		if ( ply == LocalPlayer() ) then return end -- Don't draw a name when the player is you
 		if ( !ply:Alive() ) then return end -- Check if the player is alive
+		if shoulddrawplayermarker == false then return end
 
 		local Distance = LocalPlayer():GetPos():Distance( ply:GetPos() ) --Get the distance between you and the player
 

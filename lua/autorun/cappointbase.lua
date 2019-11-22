@@ -26,6 +26,7 @@ team.SetUp(gpoint_TeamAID, "Red Team", Color(255,0,0))
 team.SetUp(gpoint_TeamBID, "Blue Team", Color(0,0,255))
 
 
+
 -- todo: fix mode set
 
 if SERVER && enableCapturePointGamemode == true then
@@ -99,7 +100,7 @@ if SERVER && enableCapturePointGamemode == true then
 	util.AddNetworkString( "gpoint_teammenu" )
 	util.AddNetworkString( "capturepointcaptured" )
 	util.AddNetworkString( "broadcastvoteuig" )
-
+	util.AddNetworkString( "markersisenable" )
 	
 
 
@@ -109,7 +110,11 @@ if SERVER && enableCapturePointGamemode == true then
 		net.Start("maketicketuithing")
 			net.WriteTable(cappostable)
 		net.Send(ply)
-		
+		if enableCapturePointGamemode == false then
+			net.Start("markersisenable")
+				
+			net.Broadcast()
+		end
 		if ply:Team() == gpoint_TeamAID then
 			local telepos = table.Random(spawnpostableA)[2]
 
